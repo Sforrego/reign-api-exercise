@@ -1,0 +1,24 @@
+create table articles (ID SERIAL PRIMARY KEY, created_at TIMESTAMP, title VARCHAR, url VARCHAR, author VARCHAR, points VARCHAR, story_text TEXT, comment_text TEXT, num_comments INTEGER,story_id INTEGER,story_title VARCHAR,story_url VARCHAR,parent_id INTEGER,created_at_i NUMERIC,objectID VARCHAR);
+
+async function updateData(){
+    axios.get('https://hn.algolia.com/api/v1/search_by_date?query=nodejs')
+    .then(response => {
+        for (var hit in response.data.hits){
+            console.log(response.data.hits);
+        }
+        //console.log(response.data);
+    })
+    .catch(error=> {
+        console.log(error);
+    })}
+updateData();
+setInterval(updateData,3600000) // 1 hour 
+
+
+
+notas:
+acquire: 30000 ms = 30 s de coneccion
+
+hacer tabla articles_tags many to many to not violate first normal form
+added crud functionalities
+separate articles from comments
